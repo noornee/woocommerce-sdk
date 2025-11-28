@@ -307,6 +307,24 @@ type (
 		Links interface{} `json:"_links"`
 	}
 
+	// ProductReviewDeletedResponse schema as seen in https://woocommerce.github.io/woocommerce-rest-api-docs/#delete-a-product-review
+	ProductReviewDeletedResponse struct {
+		Deleted  bool `json:"deleted"`
+		Previous struct {
+			ID                 int    `json:"id"`
+			DateCreated        string `json:"date_created"`
+			DateCreatedGMT     string `json:"date_created_gmt"`
+			ProductID          int    `json:"product_id"`
+			Status             string `json:"status"`
+			Reviewer           string `json:"reviewer"`
+			ReviewerEmail      string `json:"reviewer_email"`
+			Review             string `json:"review"`
+			Rating             int    `json:"rating"`
+			Verified           bool   `json:"verified"`
+			ReviewerAvatarUrls any    `json:"reviewer_avatar_urls"`
+		} `json:"previous"`
+	}
+
 	// SearchProductReviewsRequest schema to search for product reviews - https://woocommerce.github.io/woocommerce-rest-api-docs/?javascript#list-all-product-reviews
 	SearchProductReviewsRequest struct {
 		PaginationRequest

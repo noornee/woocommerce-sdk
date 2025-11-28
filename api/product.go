@@ -184,6 +184,19 @@ func (c *Call) GetAProductReview(ctx context.Context, reviewID string) (*model.P
 	return response, nil
 }
 
+// DeleteAProductReview https://woocommerce.github.io/woocommerce-rest-api-docs/#delete-a-product-review
+func (c *Call) DeleteAProductReview(ctx context.Context, reviewID string) (*model.ProductReviewDeletedResponse, error) {
+	response := &model.ProductReviewDeletedResponse{}
+
+	path := fmt.Sprintf("/products/reviews/%s?force=true", reviewID)
+	err := c.makeRequest(ctx, http.MethodDelete, path, nil, nil, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
 // ListAllProductAttributes helps to retrieve all the product attributes
 func (c *Call) ListAllProductAttributes(ctx context.Context, request model.SearchProductAttributesRequest) ([]model.ProductAttributeResponse, error) {
 	response := &[]model.ProductAttributeResponse{}
