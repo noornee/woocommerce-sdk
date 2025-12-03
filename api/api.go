@@ -30,7 +30,7 @@ type RemoteCalls interface {
 	RetrieveAProductVariation(ctx context.Context, productID, variationID string) (model.ProductVariation, error)
 	ReviewProduct(ctx context.Context, request model.ReviewProductRequest) (*model.ProductReview, error)
 	UpdateProductReview(ctx context.Context, reviewID string, request model.ReviewProductRequest) (*model.ProductReview, error)
-	ListProductReviews(ctx context.Context, request model.SearchProductReviewsRequest) ([]model.ProductReview, error)
+	ListProductReviews(ctx context.Context, request model.SearchProductReviewsRequest) ([]model.ProductReview, model.PageInfo, error)
 	GetAProductReview(ctx context.Context, reviewID string) (*model.ProductReview, error)
 	DeleteAProductReview(ctx context.Context, reviewID string) (*model.ProductReviewDeletedResponse, error)
 
