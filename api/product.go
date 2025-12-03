@@ -160,15 +160,15 @@ func (c *Call) UpdateProductReview(ctx context.Context, id string, request model
 }
 
 // ListProductReviews retrieves all product reviews. https://woocommerce.github.io/woocommerce-rest-api-docs/?javascript#list-all-product-reviews
-func (c *Call) ListProductReviews(ctx context.Context, request model.SearchProductReviewsRequest) ([]model.ProductReview, error) {
+func (c *Call) ListProductReviews(ctx context.Context, request model.SearchProductReviewsRequest) ([]model.ProductReview, model.PageInfo, error) {
 	response := &[]model.ProductReview{}
 
-	err := c.makeRequest(ctx, http.MethodGet, "/products/reviews", nil, request, response)
+	pageInfo, err := c.makePaginatedRequest(ctx, http.MethodGet, "/products/reviews", nil, request, response, request.PerPage, request.Page)
 	if err != nil {
-		return nil, err
+		return nil, model.PageInfo{}, err
 	}
 
-	return *response, nil
+	return *response, pageInfo, nil
 }
 
 // GetAProductReview retrieve a single product review by ID. https://woocommerce.github.io/woocommerce-rest-api-docs/?javascript#create-a-product-review
